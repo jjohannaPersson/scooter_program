@@ -14,6 +14,10 @@ def createScooter(payload):
     resData = res.get('data')
     return resData.get('insertedId')
 
+def updateScooter(payload):
+    r = requests.put('http://localhost:1337/api/scooter', data=payload)
+    return r.text
+
 def getOneCustomer(id):
     r = requests.get('http://localhost:1337/api/customers/' + id)
     res = r.json()

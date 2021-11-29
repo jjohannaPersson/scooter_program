@@ -1,6 +1,7 @@
 """
 Main program for simulating scooters
 """
+from time import sleep
 import db.db as db
 import data.scooters
 import data.customers
@@ -14,10 +15,11 @@ def get_scooters():
     """
     Get all scooters
     """
+    scooters.clear()
     for i in scootersID:
         scooters.append(db.getOneScooter(i))
 
-    print(scooters)
+    # print(scooters)
     return scooters
 
 def create_scooters():
@@ -54,6 +56,32 @@ def create_customers(num):
     for customer in customersID:
         customersNames.append(db.getOneCustomer(customer))
 
+def run_scooters():
+    """
+    Update position every 10th second
+    """
+    start = scooters[0].get('data')[0].get('start_time')
+    end = scooters[0].get('data')[0].get('logg')[0].get('end').get('time')
+    print(start)
+    print(end)
+
+    while True:
+        get_scooters();
+        # Uppdatera lat, lng, minska batteri med 1, sätt speed till 10
+        for scooter in scooters:
+            payload = data.scooters.update_scooter(scooter.get('data')[0].get('_id'), scooter.get('data')[0].get('battery'))
+            db.updateScooter(payload)
+            current_time = data.scooters.add_10_sec(start)
+
+        start = current_time
+
+        print("Tid just nu: " + current_time)
+        if current_time[0:2] == end[0:2] and current_time[3:5] == end[3:5]:
+            print("Thank you for this trip!")
+            break;
+
+        sleep(10)
+
 def main():
     """
     Main
@@ -65,6 +93,7 @@ def main():
     create_customers(amout_to_simulate)
     create_scooters();
     get_scooters();
+    run_scooters();
 
 
 if __name__ == "__main__":

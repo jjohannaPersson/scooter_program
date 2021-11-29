@@ -3,9 +3,10 @@ Data models for creating new scooters
 """
 from datetime import datetime
 from datetime import timedelta
+import random
 
 now = datetime.now()
-end = now + timedelta(minutes=15)
+end = now + timedelta(minutes=1)
 current_time = now.strftime("%H:%M:%S")
 end_time = end.strftime("%H:%M:%S")
 
@@ -72,3 +73,21 @@ def scooter_orebro(name):
         "end_lng": 15.131800,
     }
     return data
+
+def update_scooter(id, battery):
+    data = {
+        "_id": id,
+        "battery": int(battery) - 1,
+        "speed": 20,
+        "lat": random.uniform(59.202040, 59.302040),
+        "lng": random.uniform(18.023540, 18.123540)
+    }
+    return data
+
+def add_10_sec(start_time):
+    to_date_time = datetime.strptime(start_time, "%H:%M:%S")
+
+    add_ten = to_date_time + timedelta(seconds=10)
+    new_time = add_ten.strftime("%H:%M:%S")
+
+    return new_time
