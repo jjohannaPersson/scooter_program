@@ -19,7 +19,6 @@ def get_scooters():
     for i in scootersID:
         scooters.append(db.getOneScooter(i))
 
-    # print(scooters)
     return scooters
 
 def create_scooters():
@@ -67,16 +66,19 @@ def run_scooters():
 
     while True:
         get_scooters();
-        # Uppdatera lat, lng, minska batteri med 1, sätt speed till 10
         for scooter in scooters:
-            payload = data.scooters.update_scooter(scooter.get('data')[0].get('_id'), scooter.get('data')[0].get('battery'))
+            payload = data.scooters.update_scooter(scooter.get('data')[0].get('_id'), scooter.get('data')[0].get('position').get('lat'), scooter.get('data')[0].get('position').get('lng'), scooter.get('data')[0].get('battery'), scooter.get('data')[0].get('logg')[0].get('end').get('position').get('lat'), scooter.get('data')[0].get('logg')[0].get('end').get('position').get('lng'))
             db.updateScooter(payload)
             current_time = data.scooters.add_10_sec(start)
 
         start = current_time
 
         print("Tid just nu: " + current_time)
+        print("Nuvarande lat, long: " + str(scooters[0].get('data')[0].get('position').get('lat')) + ", " + str(scooters[0].get('data')[0].get('position').get('lng')))
         if current_time[0:2] == end[0:2] and current_time[3:5] == end[3:5]:
+            for scooter in scooters:
+                payload = data.scooters.update_scooter_done(scooter.get('data')[0].get('_id'),  scooter.get('data')[0].get('battery'), scooter.get('data')[0].get('speed'), scooter.get('data')[0].get('logg')[0].get('end').get('position').get('lat'), scooter.get('data')[0].get('logg')[0].get('end').get('position').get('lng'))
+                db.updateScooter(payload)
             print("Thank you for this trip!")
             break;
 

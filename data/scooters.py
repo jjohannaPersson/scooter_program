@@ -10,19 +10,26 @@ end = now + timedelta(minutes=1)
 current_time = now.strftime("%H:%M:%S")
 end_time = end.strftime("%H:%M:%S")
 
+sthlm_lat_one = 59.341476
+sthlm_lat_two = 59.329656
+sthlm_lng_one = 18.031697
+sthlm_lng_two = 18.123361
+
 def scooter_sthlm(name):
+    start_lat = random.uniform(sthlm_lat_one, sthlm_lat_two)
+    start_lng = random.uniform(sthlm_lng_one, sthlm_lng_two)
     data = {
         "active_user": name,
         "city_location": "Stockholm",
-        "lat": 59.202040,
-        "lng": 18.023540,
+        "lat": start_lat,
+        "lng": start_lng,
         "start_time": current_time,
         "event": "Simulering för " + name,
-        "start_lat": 59.202040,
-        "start_lng": 18.023540,
+        "start_lat": start_lat,
+        "start_lng": start_lng,
         "end_time": end_time,
-        "end_lat": 59.33914,
-        "end_lng": 18.07281,
+        "end_lat": random.uniform(sthlm_lat_one, sthlm_lat_two),
+        "end_lng": random.uniform(sthlm_lng_one, sthlm_lng_two),
     }
     return data
 
@@ -74,13 +81,13 @@ def scooter_orebro(name):
     }
     return data
 
-def update_scooter(id, battery):
+def update_scooter(id, current_lat, current_lng, battery, end_lat, end_lng):
     data = {
         "_id": id,
         "battery": int(battery) - 1,
-        "speed": 20,
-        "lat": random.uniform(59.202040, 59.302040),
-        "lng": random.uniform(18.023540, 18.123540)
+        "speed": random.randint(5, 20),
+        "lat": random.uniform(current_lat, end_lat),
+        "lng": random.uniform(current_lng, end_lng)
     }
     return data
 
@@ -91,3 +98,13 @@ def add_10_sec(start_time):
     new_time = add_ten.strftime("%H:%M:%S")
 
     return new_time
+
+def update_scooter_done(id, battery, speed, lat, lng):
+    data = {
+        "_id": id,
+        "battery": battery,
+        "speed": speed,
+        "lat": lat,
+        "lng": lng
+    }
+    return data
