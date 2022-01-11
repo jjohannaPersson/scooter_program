@@ -1,65 +1,78 @@
+""" DB conections """
 import requests
 
-def getScooters():
-    r = requests.get('http://localhost:1337/api/scooter')
-    res = r.json()
+def get_scooters():
+    """ Get scooters """
+    result = requests.get('http://localhost:1337/api/scooter')
+    res = result.json()
     return res.get('data')
 
-def getOneScooter(id):
-    r = requests.get('http://localhost:1337/api/scooter/' + id)
-    return r.json()
+def get_one_scooter(_id):
+    """ Get one scooters """
+    result = requests.get('http://localhost:1337/api/scooter/' + _id)
+    return result.json()
 
-def createScooter(payload):
-    r = requests.post('http://localhost:1337/api/scooter', data=payload)
-    res = r.json()
-    resData = res.get('data')
-    return resData
-    # return resData.get('insertedId')
+def create_scooter(payload):
+    """ Create scooters """
+    result = requests.post('http://localhost:1337/api/scooter', data=payload)
+    res = result.json()
+    res_data = res.get('data')
+    return res_data
+    # return res_data.get('insertedId')
 
-def updateScooter(payload):
-    r = requests.put('http://localhost:1337/api/scooter', data=payload)
-    return r.text
+def update_scooter(payload):
+    """ Update scooters """
+    result = requests.put('http://localhost:1337/api/scooter', data=payload)
+    return result.text
 
-def insertLogg(payload):
-    r = requests.put('http://localhost:1337/api/insertLogg', data=payload)
-    return r.text
+def insert_logg(payload):
+    """ InsertLogg to scooter """
+    result = requests.put('http://localhost:1337/api/insertLogg', data=payload)
+    return result.text
 
-def deleteScooter(id):
+def delete_scooter(_id):
+    """ Delete scooter """
     data = {
-        "_id": id
+        "_id": _id
         }
-    r = requests.delete('http://localhost:1337/api/scooter', data=data)
-    return r.text
+    result = requests.delete('http://localhost:1337/api/scooter', data=data)
+    return result.text
 
-def getCustomers():
-    r = requests.get('http://localhost:1337/api/customers')
-    res = r.json()
+def get_customers():
+    """ Get customers """
+    result = requests.get('http://localhost:1337/api/customers')
+    res = result.json()
     return res.get('data')
 
-def getOneCustomer(id):
-    r = requests.get('http://localhost:1337/api/customers/' + id)
-    res = r.json()
-    resData = res.get('data')
-    return resData.get('username')
+def get_one_customer(_id):
+    """ Get one customer """
+    result = requests.get('http://localhost:1337/api/customers/' + _id)
+    res = result.json()
+    res_data = res.get('data')
+    return res_data.get('username')
 
-def createCustomer(payload):
-    r = requests.post('http://localhost:1337/api/customers/register', data=payload)
-    res = r.json()
-    resData = res.get('data')
-    return resData.get('insertedId')
+def create_customer(payload):
+    """ Create customer """
+    result = requests.post('http://localhost:1337/api/customers/register', data=payload)
+    res = result.json()
+    res_data = res.get('data')
+    return res_data.get('insertedId')
 
-def deleteCustomer(id):
+def delete_customer(_id):
+    """ Delete customer """
     data = {
-        "_id": id
+        "_id": _id
         }
-    r = requests.delete('http://localhost:1337/api/customers', data=data)
-    return r.text
+    result = requests.delete('http://localhost:1337/api/customers', data=data)
+    return result.text
 
-def getParkingZones(city):
-    r = requests.get('http://localhost:1337/api/cities/zones/' + city)
-    res = r.json()
+def get_parking_zones(city):
+    """ Get parking zones """
+    result = requests.get('http://localhost:1337/api/cities/zones/' + city)
+    res = result.json()
     return res.get('data')
 
-def updateAmountOfBikesPark(payload):
-    r = requests.put('http://localhost:1337/api/cities/zones/update', data=payload)
-    return r.text
+def update_amount_of_bikes_park(payload):
+    """ Update amout of scooters in paring zone """
+    result = requests.put('http://localhost:1337/api/cities/zones/update', data=payload)
+    return result.text

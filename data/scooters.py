@@ -1,3 +1,4 @@
+# pylint: disable=C0103
 """
 Data models for creating new scooters
 """
@@ -19,6 +20,7 @@ sthlm_lng_one = 18.051605
 sthlm_lng_two = 18.106993
 
 def scooter_sthlm(name):
+    """ Scooter Sthlm """
     start_lat = random.uniform(sthlm_lat_one, sthlm_lat_two)
     start_lng = random.uniform(sthlm_lng_one, sthlm_lng_two)
     data = {
@@ -42,6 +44,7 @@ gbg_lng_one = 11.931808
 gbg_lng_two = 11.990259
 
 def scooter_gbg(name):
+    """ Scooter Gbg """
     start_lat = random.uniform(gbg_lat_one, gbg_lat_two)
     start_lng = random.uniform(gbg_lng_one, gbg_lng_two)
     data = {
@@ -65,6 +68,7 @@ malmo_lng_one = 12.925091
 malmo_lng_two = 13.033399
 
 def scooter_malmo(name):
+    """ Scooter Malmö """
     start_lat = random.uniform(malmo_lat_one, malmo_lat_two)
     start_lng = random.uniform(malmo_lng_one, malmo_lng_two)
     data = {
@@ -82,9 +86,10 @@ def scooter_malmo(name):
     }
     return data
 
-def update_scooter(id, current_lat, current_lng, battery, end_lat, end_lng):
+def update_scooter(_id, current_lat, current_lng, battery, end_lat, end_lng):
+    """ Update scooter """
     data = {
-        "_id": id,
+        "_id": _id,
         "battery": int(battery) - 1,
         "speed": random.randint(5, 20),
         "lat": random.uniform(current_lat, end_lat),
@@ -93,6 +98,7 @@ def update_scooter(id, current_lat, current_lng, battery, end_lat, end_lng):
     return data
 
 def add_ten_sec(start_time):
+    """ Add 10 sek """
     to_date_time = datetime.strptime(start_time, "%H:%M:%S")
 
     add_ten = to_date_time + timedelta(seconds=10)
@@ -100,12 +106,20 @@ def add_ten_sec(start_time):
 
     return new_time
 
-def update_scooter_done(id, city, battery, lat, lng):
+def update_scooter_done(_id, city, battery, lat, lng):
+    """ Update scooter when done """
     point = Point(lat, lng)
-    parkingzones = db.getParkingZones(city)
+    parkingzones = db.get_parking_zones(city)
 
     for zone in parkingzones:
-        polygon = Polygon([(zone.get('position').get('polygonePart1').get('lat'), zone.get('position').get('polygonePart1').get('lng')), (zone.get('position').get('polygonePart2').get('lat'), zone.get('position').get('polygonePart2').get('lng')), (zone.get('position').get('polygonePart3').get('lat'), zone.get('position').get('polygonePart3').get('lng')), (zone.get('position').get('polygonePart4').get('lat'), zone.get('position').get('polygonePart4').get('lng'))])
+        polygon = Polygon([(zone.get('position').get('polygonePart1').get('lat'), +
+        zone.get('position').get('polygonePart1').get('lng')), +
+        (zone.get('position').get('polygonePart2').get('lat'), +
+        zone.get('position').get('polygonePart2').get('lng')), +
+        (zone.get('position').get('polygonePart3').get('lat'), +
+        zone.get('position').get('polygonePart3').get('lng')), +
+        (zone.get('position').get('polygonePart4').get('lat'), +
+        zone.get('position').get('polygonePart4').get('lng'))])
 
         if polygon.contains(point):
             data = {
@@ -114,10 +128,10 @@ def update_scooter_done(id, city, battery, lat, lng):
                 "color": zone.get('color')
             }
             print("Uppdaterade zonen: " + zone.get('color'))
-            db.updateAmountOfBikesPark(data)
+            db.update_amount_of_bikes_park(data)
 
     data = {
-        "_id": id,
+        "_id": _id,
         "battery": battery,
         "speed": 0,
         "lat": lat,

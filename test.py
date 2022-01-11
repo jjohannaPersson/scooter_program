@@ -1,10 +1,10 @@
 """ Module for unittests """
 
 import unittest
-import main
+# import main
 import data.scooters
-import db.db as db
-from unittest.mock import MagicMock
+# import db.db as db
+# from unittest.mock import MagicMock
 
 class Testcase(unittest.TestCase):
     """ Submodule for unittests, derives from unittest.TestCase """
@@ -66,11 +66,14 @@ class Testcase(unittest.TestCase):
 
     def test_update_scooter(self):
         """ Test update scooter """
-        result = data.scooters.update_scooter('61dc666b1d854d307195d11c', 55.575206286000416, 12.97877633795938, 90, 55.589747971198285, 12.987239311985748)
+        result = data.scooters.update_scooter('61dc666b1d854d307195d11c', 55.575206286000416, +
+        12.97877633795938, 90, 55.589747971198285, 12.987239311985748)
         self.assertIsInstance(result, dict)
         self.assertEqual(result.get('battery'), 89)
-        self.assertTrue(result.get('lat') > 55.575206286000416 and result.get('lat') < 55.589747971198285)
-        self.assertTrue(result.get('lng') > 12.97877633795938 and result.get('lng') < 12.987239311985748)
+        self.assertTrue(result.get('lat') > 55.575206286000416 and +
+        result.get('lat') < 55.589747971198285)
+        self.assertTrue(result.get('lng') > 12.97877633795938 and +
+        result.get('lng') < 12.987239311985748)
 
     def test_add_ten_sek(self):
         """ Test add 10 sek """
@@ -80,7 +83,8 @@ class Testcase(unittest.TestCase):
 
     # def test_update_scooter_done(self):
     #     """ Test update scooter when done """
-    #     result = data.scooters.update_scooter_done('61dc666b1d854d307195d11c', 'Stockholm', 75, 55.575206286000416, 12.97877633795938)
+    #     result = data.scooters.update_scooter_done('61dc666b1d854d307195d11c', +
+    #'Stockholm', 75, 55.575206286000416, 12.97877633795938)
     #     self.assertIsInstance(result, dict)
     #     self.assertEqual(result.get('battery'), 75)
     #     self.assertEqual(result.get('speed'), 0)
