@@ -32,7 +32,7 @@ def deleteScooter(id):
     return r.text
 
 def getCustomers():
-    r = requests.get('http://localhost:1337/api/customers')
+    r = requests.get('http://serlocalhostver:1337/api/customers')
     res = r.json()
     return res.get('data')
 

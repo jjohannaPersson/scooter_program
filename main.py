@@ -135,13 +135,13 @@ def main():
     # print("Antal: " + amout_to_simulate)
     #
     # create_customers(amout_to_simulate)
-    # get_customers();
-    # create_scooters();
-    # get_scooters();
-    # run_scooters();
+    get_customers();
+    create_scooters();
+    get_scooters();
+    run_scooters();
 
     # delete_customers()
-    delete_scooters()
+    # delete_scooters()
 
 
 if __name__ == "__main__":
