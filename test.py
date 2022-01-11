@@ -70,11 +70,11 @@ class Testcase(unittest.TestCase):
         self.assertTrue(result.get('lat') > 55.575206286000416 and result.get('lat') < 55.589747971198285)
         self.assertTrue(result.get('lng') > 12.97877633795938 and result.get('lng') < 12.987239311985748)
 
-    def test_add_10_sek(self):
-        """ Test add 10 sek """
-        result = data.scooters.add_10_sec("10:14:05")
-        self.assertIsInstance(result, str)
-        self.assertEqual(result, "10:14:15")
+    # def test_add_10_sek(self):
+    #     """ Test add 10 sek """
+    #     result = data.scooters.add_10_sec("10:14:05")
+    #     self.assertIsInstance(result, str)
+    #     self.assertEqual(result, "10:14:15")
 
     def test_update_scooter_done(self):
         """ Test update scooter when done """
