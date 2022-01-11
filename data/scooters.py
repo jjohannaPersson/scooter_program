@@ -92,7 +92,7 @@ def update_scooter(id, current_lat, current_lng, battery, end_lat, end_lng):
     }
     return data
 
-def add_10_sec(start_time):
+def add_ten_sec(start_time):
     to_date_time = datetime.strptime(start_time, "%H:%M:%S")
 
     add_ten = to_date_time + timedelta(seconds=10)

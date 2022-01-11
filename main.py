@@ -115,7 +115,7 @@ def run_scooters():
             payload = data.scooters.update_scooter(scooter.get('_id'), scooter.get('position').get('lat'), scooter.get('position').get('lng'), scooter.get('battery'), scooter.get('logg')[-1].get('end').get('position').get('lat'), scooter.get('logg')[-1].get('end').get('position').get('lng'))
             db.updateScooter(payload)
 
-        current_time = data.scooters.add_10_sec(start)
+        current_time = data.scooters.add_ten_sec(start)
         start = current_time
 
         print("Tid just nu: " + start)
