@@ -1,0 +1,20 @@
+version: "3"
+networks:
+    mynetwork:
+services:
+    server:
+        image: alexander97olsson/api_server:latestversion
+        container_name: apiserver
+        ports:
+            - "1337:1337"
+        networks:
+            mynetwork:
+        restart:
+            "always"
+    # bike:
+    #     image: johannapersson123/simulation:latest
+    #     container_name: "bike"
+    #     networks:
+    #         mynetwork:
+    #     depends_on:
+    #         - server

@@ -9,19 +9,19 @@ import data.scooters
 class Testcase(unittest.TestCase):
     """ Submodule for unittests, derives from unittest.TestCase """
 
-    # def setUp(self):
-    #     """ Create object for all tests """
-    #     #Arrange
-    #     self.customers = main.get_customers()
-    #
-    # def tearDown(self):
-    #     """ Remove dependencies after test """
-    #     self.customers = None
-    #
-    # def test_get_customers(self):
-    #     """ Test get customers """
-    #     self.assertIsInstance(self.customers, list)
-    #     self.assertEqual(len(self.customers), 100)
+    def setUp(self):
+        """ Create object for all tests """
+        #Arrange
+        self.customers = main.get_customers()
+
+    def tearDown(self):
+        """ Remove dependencies after test """
+        self.customers = None
+
+    def test_get_customers(self):
+        """ Test get customers """
+        self.assertIsInstance(self.customers, list)
+        self.assertEqual(len(self.customers), 100)
 
     # def test_create_scooters(self):
     #     """ Test create scooters """
