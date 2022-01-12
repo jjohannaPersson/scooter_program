@@ -1,9 +1,9 @@
 """ Module for unittests """
 
 import unittest
-# import main
+import main
 import data.scooters
-# import db.db as db
+import db.db as db
 # from unittest.mock import MagicMock
 
 class Testcase(unittest.TestCase):
