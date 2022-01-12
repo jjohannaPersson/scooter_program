@@ -45,7 +45,7 @@ def delete_scooter(_id):
 
 def get_customers():
     """ Get customers """
-    result = requests.get('http://server:1337/api/customers')
+    result = requests.get('http://localhost:1337/api/customers')
     res = result.json()
     return res.get('data')
 
