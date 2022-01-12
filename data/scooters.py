@@ -112,13 +112,13 @@ def update_scooter_done(_id, city, battery, lat, lng):
     parkingzones = db.get_parking_zones(city)
 
     for zone in parkingzones:
-        polygon = Polygon([(zone.get('position').get('polygonePart1').get('lat'), +
-        zone.get('position').get('polygonePart1').get('lng')), +
-        (zone.get('position').get('polygonePart2').get('lat'), +
-        zone.get('position').get('polygonePart2').get('lng')), +
-        (zone.get('position').get('polygonePart3').get('lat'), +
-        zone.get('position').get('polygonePart3').get('lng')), +
-        (zone.get('position').get('polygonePart4').get('lat'), +
+        polygon = Polygon([(zone.get('position').get('polygonePart1').get('lat'),
+        zone.get('position').get('polygonePart1').get('lng')),
+        (zone.get('position').get('polygonePart2').get('lat'),
+        zone.get('position').get('polygonePart2').get('lng')),
+        (zone.get('position').get('polygonePart3').get('lat'),
+        zone.get('position').get('polygonePart3').get('lng')),
+        (zone.get('position').get('polygonePart4').get('lat'),
         zone.get('position').get('polygonePart4').get('lng'))])
 
         if polygon.contains(point):
