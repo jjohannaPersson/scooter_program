@@ -25,6 +25,11 @@ def update_scooter(payload):
     result = requests.put('http://localhost:1337/api/scooter', data=payload)
     return result.text
 
+def update_status(_id):
+    """ Set user to null """
+    result = requests.put('http://localhost:1337/api/scooter/setuser', data=_id)
+    return result.text
+
 def insert_logg(payload):
     """ InsertLogg to scooter """
     result = requests.put('http://localhost:1337/api/insertLogg', data=payload)

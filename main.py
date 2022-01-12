@@ -33,11 +33,11 @@ def delete_scooters():
     for scooter in all_scooters:
         name = scooter.get('active_user')
         _id = scooter.get('_id')
-        if name[0:4] == "Kund":
+        if name is None:
+            continue
+        elif name[0:4] == "Kund":
             db.delete_scooter(_id)
             print("Deleted scooter: " + name)
-        else:
-            continue
 
 def get_scooters():
     """
@@ -49,10 +49,10 @@ def get_scooters():
 
     for scooter in all_cooters:
         name = scooter.get('active_user')
-        if name[0:4] == "Kund":
-            scooters.append(scooter)
-        else:
+        if name is None:
             continue
+        elif name[0:4] == "Kund":
+            scooters.append(scooter)
 
     return scooters
 
@@ -125,11 +125,12 @@ def run_scooters():
         print("Tid just nu: " + start)
         if current_time[0:2] == end[0:2] and current_time[3:5] == end[3:5]:
             for scooter in scooters:
-                payload = data.scooters.update_scooter_done(scooter.get('_id'), +
-                scooter.get('city_location'), scooter.get('battery'), +
+                payload = data.scooters.update_scooter_done(scooter.get('_id'), scooter.get('city_location'), +
+                scooter.get('battery'), +
                 scooter.get('logg')[-1].get('end').get('position').get('lat'), +
                 scooter.get('logg')[-1].get('end').get('position').get('lng'))
                 db.update_scooter(payload)
+                db.update_status(payload.get('_id'))
             print("Thank you for this trip!")
             break
 
