@@ -10,7 +10,8 @@ except:
     print("Error")
 
 url = 'localhost'
-# print(os.environ['TOKEN'])
+print(type(os.environ['TOKEN']))
+print(os.environ['TOKEN'])
 token = os.environ.get('TOKEN') or token_config
 
 def get_scooters():
