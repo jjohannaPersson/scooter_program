@@ -60,6 +60,8 @@ class Testcase(unittest.TestCase):
         self.assertEqual(result.get('city_location'), "Göteborg")
 
         resDbGbg = db.create_scooter(result)
+        print(resDbGbg)
+        print(type(resDbGbg))
         self.assertIsNotNone(resDbGbg)
         self.assertIsInstance(resDbGbg, dict)
         self.assertTrue(resDbGbg.get('acknowledged'))
