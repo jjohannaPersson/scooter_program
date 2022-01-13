@@ -4,31 +4,9 @@ import unittest
 import main
 import data.scooters
 import db.db as db
-# from unittest.mock import MagicMock
 
 class Testcase(unittest.TestCase):
     """ Submodule for unittests, derives from unittest.TestCase """
-
-    # def setUp(self):
-    #     """ Create object for all tests """
-    #     #Arrange
-    #     self.customers = main.get_customers()
-    #     result = data.scooters.scooter_sthlm("Test_kund_sthlm")
-    #     self.scootersgbg = data.scooters.scooter_gbg("Test_kund_gbg")
-    #     self.scootersmalmo = data.scooters.scooter_malmo("Test_kund_malmo")
-    #     resDbSthlm = db.create_scooter(self.scooterssthlm)
-    #     resDbGbg = db.create_scooter(self.scootersgbg)
-    #     resDbMalmo = db.create_scooter(self.scootersmalmo)
-
-    # def tearDown(self):
-    #     """ Remove dependencies after test """
-    #     self.customers = None
-    #     self.scooterssthlm = None
-    #     self.scootersgbg = None
-    #     self.scootersmalmo = None
-    #     self.resDbSthlm = None
-    #     self.resDbGbg = None
-    #     self.resDbMalmo = None
 
     def test_get_customers(self):
         """ Test get customers """
@@ -60,7 +38,6 @@ class Testcase(unittest.TestCase):
         self.assertEqual(result.get('city_location'), "Göteborg")
 
         resDbGbg = db.create_scooter(result)
-        print(type(resDbGbg))
         self.assertIsNotNone(resDbGbg)
         self.assertIsInstance(resDbGbg, dict)
         self.assertTrue(resDbGbg.get('acknowledged'))
