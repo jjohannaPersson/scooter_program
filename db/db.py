@@ -17,6 +17,8 @@ get_token = os.environ.get('TOKEN') or token_config
 token = {
     "x-access-token": get_token
 }
+print(get_token)
+print(token)
 
 def get_scooters():
     """ Get scooters """
