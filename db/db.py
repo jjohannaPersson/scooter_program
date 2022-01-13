@@ -10,15 +10,11 @@ except:
     print("Error")
 
 url = 'localhost'
-# print(type(os.environ['TOKEN']))
-# print(os.environ['TOKEN'])
 get_token = os.environ.get('TOKEN') or token_config
 
 token = {
     "x-access-token": get_token
 }
-print(get_token)
-print(token)
 
 def get_scooters():
     """ Get scooters """
@@ -33,12 +29,9 @@ def get_one_scooter(_id):
 
 def create_scooter(payload):
     """ Create scooters """
-    print("I was here")
     result = requests.post('http://' + url + ':1337/api/scooter', data=payload, headers=token)
     res = result.json()
-    print(res)
     res_data = res.get('data')
-    print(res_data)
     return res_data
 
 def update_scooter(payload):
