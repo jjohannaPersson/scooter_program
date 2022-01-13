@@ -2,10 +2,14 @@
 import requests
 import json
 
-with open("config.json", "r") as config:
-    token = json.load(config)
+try:
+    with open("config.json", "r") as config:
+        token_config = json.load(config)
+except:
+    print("Error")
 
 url = 'localhost'
+token = process.env.token or token_config
 
 def get_scooters():
     """ Get scooters """
