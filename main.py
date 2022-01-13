@@ -1,12 +1,10 @@
 """
 Main program for simulating scooters
 """
-# from time import sleep
 import db.db as db
 import data.scooters
 import data.customers
 
-# scootersID = []
 scooters = []
 # customers_ID = []
 customers_names= []
@@ -24,20 +22,21 @@ def delete_customers():
             db.delete_customer(_id)
             print("Deleted: " + name)
 
-def delete_scooters():
+def delete_scooters(delEvent):
     """
     Clean up
     """
     all_scooters = db.get_scooters()
 
     for scooter in all_scooters:
-        name = scooter.get('active_user')
+        event = scooter.get('logg')[0].get('event')
         _id = scooter.get('_id')
-        if name is None:
+        print()
+        if event is None:
             continue
-        elif name[0:4] == "Kund":
+        elif event[15:19] == delEvent:
             db.delete_scooter(_id)
-            print("Deleted scooter: " + name)
+            print("Deleted: " + event)
 
 def get_scooters():
     """
@@ -130,7 +129,7 @@ def run_scooters():
                 scooter.get('logg')[-1].get('end').get('position').get('lat'), +
                 scooter.get('logg')[-1].get('end').get('position').get('lng'))
                 db.update_scooter(payload)
-                db.update_status(payload.get('_id'))
+                db.update_status({"_id": scooter.get('_id')})
             print("Thank you for this trip!")
             break
 
@@ -138,18 +137,14 @@ def main():
     """
     Main
     """
-    # amout_to_simulate = input("How many scooters do you want to simulate? ")
-    #
-    # print("Antal: " + amout_to_simulate)
-    #
-    # create_customers(amout_to_simulate)
+    # create_customers(100)
     get_customers()
     create_scooters()
     get_scooters()
     run_scooters()
 
     # delete_customers()
-    # delete_scooters()
+    # delete_scooters("Kund")
 
 
 if __name__ == "__main__":

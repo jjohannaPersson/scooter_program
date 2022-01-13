@@ -9,60 +9,80 @@ import db.db as db
 class Testcase(unittest.TestCase):
     """ Submodule for unittests, derives from unittest.TestCase """
 
-    def setUp(self):
-        """ Create object for all tests """
-        #Arrange
-        self.customers = main.get_customers()
+    # def setUp(self):
+    #     """ Create object for all tests """
+    #     #Arrange
+    #     self.customers = main.get_customers()
+    #     result = data.scooters.scooter_sthlm("Test_kund_sthlm")
+    #     self.scootersgbg = data.scooters.scooter_gbg("Test_kund_gbg")
+    #     self.scootersmalmo = data.scooters.scooter_malmo("Test_kund_malmo")
+    #     resDbSthlm = db.create_scooter(self.scooterssthlm)
+    #     resDbGbg = db.create_scooter(self.scootersgbg)
+    #     resDbMalmo = db.create_scooter(self.scootersmalmo)
 
-    def tearDown(self):
-        """ Remove dependencies after test """
-        self.customers = None
+    # def tearDown(self):
+    #     """ Remove dependencies after test """
+    #     self.customers = None
+    #     self.scooterssthlm = None
+    #     self.scootersgbg = None
+    #     self.scootersmalmo = None
+    #     self.resDbSthlm = None
+    #     self.resDbGbg = None
+    #     self.resDbMalmo = None
 
     def test_get_customers(self):
         """ Test get customers """
-        self.assertIsInstance(self.customers, list)
-        self.assertEqual(len(self.customers), 100)
+        result = main.get_customers()
+        self.assertIsInstance(result, list)
+        self.assertEqual(len(result), 100)
 
-    # def test_create_scooters(self):
-    #     """ Test create scooters """
-    #     self.assertTrue(main.create_scooters())
-
-    def test_create_scooter_sthlm(self):
-        """ Test create scooter sthlm """
-        result = data.scooters.scooter_sthlm("Test_kund")
+    def test_create_delete_scooter_sthlm(self):
+        """ Test create and delete scooter sthlm """
+        result = data.scooters.scooter_sthlm("Test_kund_sthlm")
         self.assertIsInstance(result, dict)
-        self.assertEqual(result.get('active_user'), "Test_kund")
+        self.assertEqual(result.get('active_user'), "Test_kund_sthlm")
         self.assertEqual(result.get('city_location'), "Stockholm")
 
-        # db.createScooter(result) = MagicMock()
-        # db.createScooter(result).assert_called()
-        # self.assertIsNotNone(resDb)
-        # self.assertIsInstance(resDb, dict)
-        # self.assertTrue(resDb.get('acknowledged'))
+        resDbSthlm = db.create_scooter(result)
+        self.assertIsNotNone(resDbSthlm)
+        self.assertIsInstance(resDbSthlm, dict)
+        self.assertTrue(resDbSthlm.get('acknowledged'))
 
-    def test_create_scooter_gbg(self):
-        """ Test create scooter gbg """
-        result = data.scooters.scooter_gbg("Test_kund")
+        _idSthlm = resDbSthlm.get('insertedId')
+        resSthlm = db.delete_scooter(_idSthlm)
+        self.assertEqual(resSthlm, '{"data":{"result":"Object: ' + _idSthlm + ' deleted"}}')
+
+    def test_create_delete_scooter_gbg(self):
+        """ Test create and delete scooter gbg """
+        result = data.scooters.scooter_gbg("Test_kund_gbg")
         self.assertIsInstance(result, dict)
-        self.assertEqual(result.get('active_user'), "Test_kund")
+        self.assertEqual(result.get('active_user'), "Test_kund_gbg")
         self.assertEqual(result.get('city_location'), "Göteborg")
 
-        # resDb = db.createScooter(result)
-        # self.assertIsNotNone(resDb)
-        # self.assertIsInstance(resDb, dict)
-        # self.assertTrue(resDb.get('acknowledged'))
+        resDbGbg = db.create_scooter(result)
+        self.assertIsNotNone(resDbGbg)
+        self.assertIsInstance(resDbGbg, dict)
+        self.assertTrue(resDbGbg.get('acknowledged'))
 
-    def test_create_scooter_malmo(self):
-        """ Test create scooter malmö """
-        result = data.scooters.scooter_malmo("Test_kund")
+        _idGbg = resDbGbg.get('insertedId')
+        resGbg = db.delete_scooter(_idGbg)
+        self.assertEqual(resGbg, '{"data":{"result":"Object: ' + _idGbg + ' deleted"}}')
+
+    def test_create_delete_scooter_malmo(self):
+        """ Test create and delete scooter malmö """
+        result = data.scooters.scooter_malmo("Test_kund_malmo")
         self.assertIsInstance(result, dict)
-        self.assertEqual(result.get('active_user'), "Test_kund")
+        self.assertEqual(result.get('active_user'), "Test_kund_malmo")
         self.assertEqual(result.get('city_location'), "Malmö")
-        #
-        # resDb = db.createScooter(result)
-        # self.assertIsNotNone(resDb)
-        # self.assertIsInstance(resDb, dict)
-        # self.assertTrue(resDb.get('acknowledged'))
+
+        resDbMalmo = db.create_scooter(result)
+        self.assertIsNotNone(resDbMalmo)
+        self.assertIsInstance(resDbMalmo, dict)
+        self.assertTrue(resDbMalmo.get('acknowledged'))
+
+        _idMalmo = resDbMalmo.get('insertedId')
+        resMalmo = db.delete_scooter(_idMalmo)
+        self.assertEqual(resMalmo, '{"data":{"result":"Object: ' + _idMalmo + ' deleted"}}')
 
     def test_update_scooter(self):
         """ Test update scooter """
@@ -81,13 +101,13 @@ class Testcase(unittest.TestCase):
         self.assertIsInstance(result, str)
         self.assertEqual(result, "10:14:15")
 
-    # def test_update_scooter_done(self):
-    #     """ Test update scooter when done """
-    #     result = data.scooters.update_scooter_done('61dc666b1d854d307195d11c', +
-    #'Stockholm', 75, 55.575206286000416, 12.97877633795938)
-    #     self.assertIsInstance(result, dict)
-    #     self.assertEqual(result.get('battery'), 75)
-    #     self.assertEqual(result.get('speed'), 0)
+    def test_update_scooter_done(self):
+        """ Test update scooter when done """
+        result = data.scooters.update_scooter_done('61dc666b1d854d307195d11c',
+        'Stockholm', 75, 55.575206286000416, 12.97877633795938)
+        self.assertIsInstance(result, dict)
+        self.assertEqual(result.get('battery'), 75)
+        self.assertEqual(result.get('speed'), 0)
 
 if __name__ == '__main__':
     unittest.main()
