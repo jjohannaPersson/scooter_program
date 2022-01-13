@@ -1,6 +1,7 @@
 """ DB conections """
 import requests
 import json
+import os
 
 try:
     with open("config.json", "r") as config:
@@ -9,7 +10,7 @@ except:
     print("Error")
 
 url = 'localhost'
-token = process.env.token or token_config
+token = os.environ['token'] or token_config
 
 def get_scooters():
     """ Get scooters """
