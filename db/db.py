@@ -10,8 +10,8 @@ except:
     print("Error")
 
 url = 'localhost'
-print(type(os.environ['TOKEN']))
-print(os.environ['TOKEN'])
+# print(type(os.environ['TOKEN']))
+# print(os.environ['TOKEN'])
 get_token = os.environ.get('TOKEN') or token_config
 
 token = {
