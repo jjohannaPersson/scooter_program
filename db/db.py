@@ -31,9 +31,12 @@ def get_one_scooter(_id):
 
 def create_scooter(payload):
     """ Create scooters """
+    print("I was here")
     result = requests.post('http://' + url + ':1337/api/scooter', data=payload, headers=token)
     res = result.json()
+    print(res)
     res_data = res.get('data')
+    print(res_data)
     return res_data
 
 def update_scooter(payload):
