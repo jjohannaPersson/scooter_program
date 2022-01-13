@@ -12,7 +12,11 @@ except:
 url = 'localhost'
 print(type(os.environ['TOKEN']))
 print(os.environ['TOKEN'])
-token = os.environ.get('TOKEN') or token_config
+get_token = os.environ.get('TOKEN') or token_config
+
+token = {
+    "x-access-token": get_token
+}
 
 def get_scooters():
     """ Get scooters """
