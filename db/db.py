@@ -10,7 +10,7 @@ except:
     print("Error")
 
 url = 'localhost'
-token = os.environ['x-access-token'] or token_config
+token = os.environ['TOKEN'] or token_config
 
 def get_scooters():
     """ Get scooters """
