@@ -1,6 +1,9 @@
 __Travis__
+
 [![Build Status](https://app.travis-ci.com/jjohannaPersson/scooter_program.svg?branch=master)](https://app.travis-ci.com/jjohannaPersson/scooter_program)
+
 __Scrutinizer__
+
 [![Build Status](https://scrutinizer-ci.com/g/jjohannaPersson/scooter_program/badges/build.png?b=master)](https://scrutinizer-ci.com/g/jjohannaPersson/scooter_program/build-status/master)
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jjohannaPersson/scooter_program/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jjohannaPersson/scooter_program/?branch=master)
