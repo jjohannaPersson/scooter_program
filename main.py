@@ -22,7 +22,7 @@ def delete_customers():
             db.delete_customer(_id)
             print("Deleted: " + name)
 
-def delete_scooters(delEvent):
+def delete_scooters(del_event):
     """
     Clean up
     """
@@ -34,7 +34,7 @@ def delete_scooters(delEvent):
         print()
         if event is None:
             continue
-        elif event[15:19] == delEvent:
+        elif event[15:19] == del_event:
             db.delete_scooter(_id)
             print("Deleted: " + event)
 

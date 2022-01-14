@@ -21,14 +21,14 @@ class Testcase(unittest.TestCase):
         self.assertEqual(result.get('active_user'), "Test_kund_sthlm")
         self.assertEqual(result.get('city_location'), "Stockholm")
 
-        resDbSthlm = db.create_scooter(result)
-        self.assertIsNotNone(resDbSthlm)
-        self.assertIsInstance(resDbSthlm, dict)
-        self.assertTrue(resDbSthlm.get('acknowledged'))
+        res_db_sthlm = db.create_scooter(result)
+        self.assertIsNotNone(res_db_sthlm)
+        self.assertIsInstance(res_db_sthlm, dict)
+        self.assertTrue(res_db_sthlm.get('acknowledged'))
 
-        _idSthlm = resDbSthlm.get('insertedId')
-        resSthlm = db.delete_scooter(_idSthlm)
-        self.assertEqual(resSthlm, '{"data":{"result":"Object: ' + _idSthlm + ' deleted"}}')
+        id_sthlm = res_db_sthlm.get('insertedId')
+        res_sthlm = db.delete_scooter(id_sthlm)
+        self.assertEqual(res_sthlm, '{"data":{"result":"Object: ' + id_sthlm + ' deleted"}}')
 
     def test_create_delete_scooter_gbg(self):
         """ Test create and delete scooter gbg """
@@ -37,14 +37,14 @@ class Testcase(unittest.TestCase):
         self.assertEqual(result.get('active_user'), "Test_kund_gbg")
         self.assertEqual(result.get('city_location'), "Göteborg")
 
-        resDbGbg = db.create_scooter(result)
-        self.assertIsNotNone(resDbGbg)
-        self.assertIsInstance(resDbGbg, dict)
-        self.assertTrue(resDbGbg.get('acknowledged'))
+        res_db_gbg = db.create_scooter(result)
+        self.assertIsNotNone(res_db_gbg)
+        self.assertIsInstance(res_db_gbg, dict)
+        self.assertTrue(res_db_gbg.get('acknowledged'))
 
-        _idGbg = resDbGbg.get('insertedId')
-        resGbg = db.delete_scooter(_idGbg)
-        self.assertEqual(resGbg, '{"data":{"result":"Object: ' + _idGbg + ' deleted"}}')
+        id_gbg = res_db_gbg.get('insertedId')
+        res_gbg = db.delete_scooter(id_gbg)
+        self.assertEqual(res_gbg, '{"data":{"result":"Object: ' + id_gbg + ' deleted"}}')
 
     def test_create_delete_scooter_malmo(self):
         """ Test create and delete scooter malmö """
@@ -53,14 +53,14 @@ class Testcase(unittest.TestCase):
         self.assertEqual(result.get('active_user'), "Test_kund_malmo")
         self.assertEqual(result.get('city_location'), "Malmö")
 
-        resDbMalmo = db.create_scooter(result)
-        self.assertIsNotNone(resDbMalmo)
-        self.assertIsInstance(resDbMalmo, dict)
-        self.assertTrue(resDbMalmo.get('acknowledged'))
+        res_db_malmo = db.create_scooter(result)
+        self.assertIsNotNone(res_db_malmo)
+        self.assertIsInstance(res_db_malmo, dict)
+        self.assertTrue(res_db_malmo.get('acknowledged'))
 
-        _idMalmo = resDbMalmo.get('insertedId')
-        resMalmo = db.delete_scooter(_idMalmo)
-        self.assertEqual(resMalmo, '{"data":{"result":"Object: ' + _idMalmo + ' deleted"}}')
+        id_malmo = res_db_malmo.get('insertedId')
+        res_malmo = db.delete_scooter(id_malmo)
+        self.assertEqual(res_malmo, '{"data":{"result":"Object: ' + id_malmo + ' deleted"}}')
 
     def test_update_scooter(self):
         """ Test update scooter """

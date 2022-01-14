@@ -1,7 +1,8 @@
+# pylint: disable=C0103
 """ DB conections """
-import requests
 import json
 import os
+import requests
 
 try:
     with open("config.json", "r") as config:
